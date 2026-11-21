@@ -50,7 +50,7 @@ export const PASSENGER_CHECKIN_INNER_TYPE = "com.etzhayyim.apps.airDcs.passenger
 export const BAGGAGE_RECORD_INNER_TYPE = "com.etzhayyim.apps.airDcs.baggageRecord";
 export const APIS_MANIFEST_INNER_TYPE = "com.etzhayyim.apps.airDcs.apisManifest";
 
-export const AIR_DCS_DID_PREFIX = "did:web:air-dcs.etzhayyim.com:" as const;
+export const AIR_DCS_DID_PREFIX = "did:web:air-dcs.itonami.app:" as const;
 
 // ─── Flight departure anchor (PLAINTEXT, public operational metadata) ─
 

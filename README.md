@@ -190,19 +190,19 @@ SvelteKit 版と同じである。違うのは次の 4 点だけ。
 足す」という規則**に従ったもので、検証器の `additions-match-allowed` が
 **継承 20 ファイル以外の全部**がそのリストと一致することを機械で守る。
 
-## 呼び先が 1 つも解決しない（移行では直らない）
+## 呼び先に 1 つも到達できない（移行では直らない）
 
-| ホスト | 役割 | DNS（2026-08-18 実測、`@1.1.1.1`） |
+| ホスト | 役割 | DNS（`@1.1.1.1`。route の 2 行は 2026-11-21、ほかは 2026-08-18 実測） |
 |---|---|---|
-| `air-dcs.etzhayyim.com` | 公開ホスト（wrangler の route） | **NXDOMAIN** |
-| `a1rd3cs0.etzhayyim.com` | 同（nanoid 側） | **NXDOMAIN** |
+| `air-dcs.itonami.app` | 公開ホスト（wrangler の route） | 解決する。応答は **522**（2026-11-21 実測） |
+| `a1rd3cs0.itonami.app` | 同（nanoid 側） | 解決する。応答は **522**（2026-11-21 実測） |
 | `mcp.etzhayyim.com` | `/xrpc/:nsid` の中継先 | **NXDOMAIN** |
 | `dispatcher.etzhayyim.com` | `app.ts` の中継先（持ち越さず） | **NXDOMAIN** |
 | `etzhayyim.com` | apex | NOERROR（104.21.51.111 / 172.67.179.128） |
 
 deploy 先も中継先も、いま存在しない。したがって `kotodama.jsonld` が宣言する
-`did:web:air-dcs.etzhayyim.com` も解決しない（`did:web` は
-`https://air-dcs.etzhayyim.com/.well-known/did.json` を要求する）。
+`did:web:air-dcs.itonami.app` も解決しない（`did:web` は
+`https://air-dcs.itonami.app/.well-known/did.json` を要求する）。
 `/xrpc/` は到達できなければ **502 を返す** —— 成功と同じ形で隠さない。
 
 ## 由来（custody）
@@ -221,7 +221,7 @@ deploy 先も中継先も、いま存在しない。したがって `kotodama.js
 
 ## 残っている欠陥（移行では直っていない）
 
-1. **ホストが 1 つも解決しない**（上表）。deploy するか retire するかは別の決定。
+1. **ホストに 1 つも到達できない**（上表）。deploy するか retire するかは別の決定。
 2. **`kotodama.jsonld` の `@context`（`https://etzhayyim.com/ns/kotodama/v1`）は
    404。** 文書は JSON-LD の形をしているだけで expand できない。
 3. **`kotoba/` の 2 つの盲目のテストと、計算しない `computeLoadSheet`。**
@@ -281,3 +281,14 @@ exit 0 = 全一致 / 1 = 食い違い / **2 = 判定できなかった**（0 と
 ページは §3 で採点したページと sha256 が同一**（`f0a4013a…`、83,466 バイト）
 なので、採点した artifact と出荷される artifact が同じものであることは名前では
 なく hash で確かめてある。
+
+## upstream からの分岐（2026-11-21、JUN-1410）
+
+ドメインを `itonami.app` に統一する決定に合わせて、wrangler の route と `did:web` の識別子を
+`etzhayyim.com` から `itonami.app` へ移した。この app は未 deploy で、旧い識別子が解決したことは一度も無い。
+新しいホスト名（`a1rd3cs0.itonami.app`、`air-dcs.itonami.app`）は `itonami.app` のワイルドカードで名前が引けるが、
+Worker が bind されていないので応答は 522 になる（2026-11-21 実測）。
+
+upstream の byte と一致しなくなったファイル: `kotoba/src/types.ts`、`kotoba/test/air-dcs.test.ts`、`kotodama.jsonld`。
+検証器（`scripts/`）の sha256 と byte 数は新しい内容に合わせてある。
+変えていないもの: ほかのサービスのホスト名、lexicon の名前空間、`docs/adr/`（当時の記録）。

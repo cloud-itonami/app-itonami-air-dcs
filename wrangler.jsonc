@@ -25,12 +25,12 @@
   // migration deleted the producer of. Both are gone.
   "routes": [
     {
-      "pattern": "a1rd3cs0.etzhayyim.com/*",
-      "zone_name": "etzhayyim.com"
+      "pattern": "a1rd3cs0.itonami.app/*",
+      "zone_name": "itonami.app"
     },
     {
-      "pattern": "air-dcs.etzhayyim.com/*",
-      "zone_name": "etzhayyim.com"
+      "pattern": "air-dcs.itonami.app/*",
+      "zone_name": "itonami.app"
     }
   ]
 }

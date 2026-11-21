@@ -1,6 +1,6 @@
 {
   "@context": "https://etzhayyim.com/ns/kotodama/v1",
-  "@id": "did:web:air-dcs.etzhayyim.com",
+  "@id": "did:web:air-dcs.itonami.app",
   "name": "air-dcs",
   "nanoid": "a1rd3cs0",
   "project": "air-dcs",
