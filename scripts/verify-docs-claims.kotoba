@@ -25,7 +25,7 @@
 ;; kotoba/src/types.ts, kotoba/test/air-dcs.test.ts, kotodama.jsonld diverged from upstream ON PURPOSE; the hashes and byte totals pinned below are the
 ;; new content.
 (def claims
-  {:tracked-files 28
+  {:tracked-files 29
    :preserved-bytes 55362              ; 移行が 1 バイトも触っていない 11 ファイル
    :appview-ts-or-svelte-files 0
    :kotoba-ts-files 5                  ; 移行対象外の参照実装スライス（README §「kotoba/ は移していない」）

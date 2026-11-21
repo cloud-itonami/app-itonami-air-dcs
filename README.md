@@ -57,7 +57,7 @@ route は `[...path]`（rest parameter）だったので `/xrpc/a/b` は nsid `"
 `/xrpc/`）だけが 400 `Missing XRPC method` で、文言も SvelteKit 版のままである。
 **絞るのは移行ではなく方針変更**なので、やるなら別の決定として記録する。
 
-## いま在るもの — 28 ファイル
+## いま在るもの — 29 ファイル
 
 | 面 | ファイル |
 |---|---|
@@ -69,7 +69,7 @@ route は `[...path]`（rest parameter）だったので `/xrpc/a/b` は nsid `"
 | Worker 設定 | `wrangler.jsonc` |
 | actor 記述子 | `kotodama.jsonld` |
 | 参照実装（**移行対象外**） | `kotoba/`（TypeScript 5 本 + package/tsconfig、下記） |
-| 由来・権利・識別 | `NOTICE` / `README.edn` / `migration.edn` / `MIGRATION-TODO.md` |
+| 由来・権利・識別 | `NOTICE` / `README.edn` / `migration.edn` / `MIGRATION-TODO.md` / `blueprint.edn` |
 | 文書 | `README.md` / `docs/operator-quickstart.md` / `docs/adr/0001-*.edn` |
 
 **appview の TypeScript / Svelte / JavaScript は 5 本から 0 本、正本言語
