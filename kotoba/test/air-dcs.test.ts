@@ -20,7 +20,7 @@ import {
   coverage,
 } from "../src/index.js";
 
-const OWNER = "did:web:air-dcs.etzhayyim.com";
+const OWNER = "did:web:air-dcs.itonami.app";
 
 describe("air-dcs kotoba (kotoba-E2E split)", () => {
   let e: any;
@@ -32,7 +32,7 @@ describe("air-dcs kotoba (kotoba-E2E split)", () => {
     it("registers, dedups, updates, gets, lists/filters", async () => {
       const r = await registerFlight(e, { flightNo: "GF101", depDate: "2026-06-10", gate: "A12" });
       expect(r.status).toBe("registered");
-      expect(r.did).toBe("did:web:air-dcs.etzhayyim.com:flt:gf101:2026-06-10");
+      expect(r.did).toBe("did:web:air-dcs.itonami.app:flt:gf101:2026-06-10");
       expect((await registerFlight(e, { flightNo: "GF101", depDate: "2026-06-10" })).status).toBe("alreadyExists");
       expect((await registerFlight(e, { flightNo: "", depDate: "2026-06-10" })).status).toBe("rejected");
 

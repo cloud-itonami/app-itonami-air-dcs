@@ -26,9 +26,9 @@
 (def actor-did
   "`kotodama.jsonld` の `@id`。ここに写しているのは `/health` が名乗るためで、
   正本はあちら側。**この DID は解決しない** —— `did:web` は
-  `https://air-dcs.etzhayyim.com/.well-known/did.json` を要求するが、その host は
+  `https://air-dcs.itonami.app/.well-known/did.json` を要求するが、その host は
   NXDOMAIN（2026-08-18 実測）。移行はそれを直さない。"
-  "did:web:air-dcs.etzhayyim.com")
+  "did:web:air-dcs.itonami.app")
 
 (def default-nanoid
   "撤去した `src/app.ts` が `env.APP_NANOID ?? \"a1rd3cs0\"` と書いていた既定値。

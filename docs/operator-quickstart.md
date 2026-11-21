@@ -35,7 +35,7 @@ npx --yes kbb --backend sci scripts/verify-docs-claims.cljk .        # <dir> は
 ```
 SCANNED	25
 PASS	tracked-files	expected=27	actual=27
-PASS	preserved-bytes	expected=55370	actual=55370
+PASS	preserved-bytes	expected=55362	actual=55362
 PASS	preserved-files-unchanged	expected=[]	actual=[]
 PASS	removed-by-migration-absent	expected=[]	actual=[]
 PASS	appview-ts-or-svelte-files	expected=0	actual=0
@@ -304,7 +304,7 @@ curl -s -o /dev/null -w 'status=%{http_code}\n' http://127.0.0.1:8801/_app/meta
 ```
 [wrangler:info] Ready on http://127.0.0.1:8801
 status=200 ct=text/html; charset=utf-8 bytes=83466
-{"ok":true,"app":"air-dcs","runtime":"cljs","actor":"did:web:air-dcs.etzhayyim.com",
+{"ok":true,"app":"air-dcs","runtime":"cljs","actor":"did:web:air-dcs.itonami.app",
  "nanoid":"a1rd3cs0","routes":["/","/health","/xrpc/:nsid"],
  "methods":["com.etzhayyim.apps.airDcs.processCheckIn",
             "com.etzhayyim.apps.airDcs.processBoardingPass",
@@ -357,14 +357,15 @@ cd "$REPO" && npx wrangler deploy
 **この walk では deploy していない。** そして route が指すホストは解決しない。
 
 ```bash
-for h in air-dcs.etzhayyim.com a1rd3cs0.etzhayyim.com mcp.etzhayyim.com \
+for h in air-dcs.itonami.app a1rd3cs0.itonami.app mcp.etzhayyim.com \
          dispatcher.etzhayyim.com etzhayyim.com; do
   dig "$h" @1.1.1.1 | grep -o 'status: [A-Z]*' | head -1
 done
 ```
 
 実測（2026-08-18T11:06Z）: 上 4 つが **NXDOMAIN**、apex `etzhayyim.com` だけが
-NOERROR（104.21.51.111 / 172.67.179.128）。deploy が成功しても誰も到達できず、
+NOERROR（104.21.51.111 / 172.67.179.128）だった。route の 2 ホストは 2026-11-21 に
+`itonami.app` へ移したので、いまは NOERROR で、応答は 522 になる（JUN-1410）。deploy が成功しても誰も到達できず、
 到達できたとしても `/xrpc/` の中継は **502** を返す（成功と同じ形で隠さない）。
 
 superproject の deploy guard は `origin/main` を含む checkout からの deploy しか
