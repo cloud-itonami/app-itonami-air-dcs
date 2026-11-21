@@ -354,7 +354,7 @@ cd "$REPO/kotoba" && npm install && npx vitest run
 cd "$REPO" && npx wrangler deploy
 ```
 
-**この walk では deploy していない。** そして route が指すホストは解決しない。
+**この walk では deploy していない。** そして route が指すホストは応答しない。
 
 ```bash
 for h in air-dcs.itonami.app a1rd3cs0.itonami.app mcp.etzhayyim.com \

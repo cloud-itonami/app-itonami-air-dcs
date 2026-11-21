@@ -76,7 +76,7 @@
    [:p {:class "dcs-lede"}
     "この appview は TypeScript/Svelte から ClojureScript へ移行済み。"
     "deploy される bundle は、いま読んでいるソースからコンパイルされたもので"
-    "ある（docs/adr/0001）。呼び先のホストはいずれも解決しない —— それは"
+    "ある（docs/adr/0001）。呼び先のホストにはいずれも到達できない —— それは"
     "移行では直らない別の決定である。"]
    (when built-at
      [:p {:class "dcs-note"} "bundle build: " built-at])))
